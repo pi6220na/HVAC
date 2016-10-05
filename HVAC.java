@@ -1,4 +1,13 @@
-// Test push to gitHub
+/*
+    Lab 7 Essentials Problem 3 - HVAC Service Call Program
+    Jeremy Wolfe 10/05/2016
+
+    Forked from: https://github.com/minneapolis-edu/HVAC
+
+    This program has been modified by adding a new Hot Water Heater
+    class as well as supporting code.
+
+ */
 
 import java.util.LinkedList;
 import java.util.Date;
@@ -7,7 +16,7 @@ import java.util.Scanner;
 public class HVAC {
 
 
-    /** Program to manage service calls to furnaces and AC units
+    /** Program to manage service calls to furnaces, AC units, and hot water heaters
      */
 
     private static LinkedList<ServiceCall> todayServiceCalls;
@@ -57,6 +66,7 @@ public class HVAC {
 
                     //Remove from head of the queue
 
+                    System.out.println();
                     if (todayServiceCalls.isEmpty()) {
                         System.out.println("No service calls today");
                         break;
@@ -64,7 +74,8 @@ public class HVAC {
 
                     ServiceCall resolvedCall = todayServiceCalls.remove();
 
-                    System.out.println("Enter resolution for " + resolvedCall);
+                    System.out.println(resolvedCall);
+                    System.out.println("Enter resolution: ");
 
                     String resolution = getStringInput();
                     System.out.println("Enter fee charged to customer");
@@ -81,6 +92,7 @@ public class HVAC {
                 }
                 case 3: {
                     //Print next service call - it is the one at the top of the queue
+                    System.out.println();
                     if (todayServiceCalls.isEmpty()) {
                         System.out.println("No service calls today");
                         break;
@@ -92,6 +104,7 @@ public class HVAC {
                 //Print all service calls
                 case 4: {
 
+                    System.out.println();
                     System.out.println("Today's service calls are: ");
 
                     if (todayServiceCalls.isEmpty()) {
@@ -106,6 +119,7 @@ public class HVAC {
                 }
 
                 case 5: {
+                    System.out.println();
                     System.out.println("List of resolved calls: ");
 
                     if (resolvedServiceCalls.isEmpty()) {
@@ -127,6 +141,7 @@ public class HVAC {
                 }
 
                 default: {
+                    System.out.println();
                     System.out.println("Enter a number from the menu choices");
                 }
 
@@ -147,7 +162,8 @@ public class HVAC {
 
         System.out.println("1. Add service call for furnace");
         System.out.println("2. Add service call for AC unit");
-        System.out.println("3. Quit");
+        System.out.println("3. Add service call for Water Heater");
+        System.out.println("4. Quit");
 
         int choice = getPositiveIntInput();
 
@@ -192,6 +208,21 @@ public class HVAC {
 
             }
             case 3: {
+
+                System.out.println("Enter address of Water Heater Unit");
+                String address = getStringInput();
+                System.out.println("Enter description of problem");
+                String problem = getStringInput();
+                System.out.println("Enter age Water Heater (decimal years)");
+                double heaterAge = getPositiveDoubleInput();
+
+                WaterHeater wh = new WaterHeater(address, problem, new Date(), heaterAge);
+                todayServiceCalls.add(wh);
+                System.out.println("Added the following Water Heater to list of calls:\n" + wh);
+                break;
+            }
+
+            case 4: {
                 return;
 
             }
